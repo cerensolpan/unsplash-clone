@@ -1,0 +1,26 @@
+.photoValue{
+    grid-template-columns: minmax(0,1fr);
+}
+
+.container{
+    margin-inline: auto;
+    max-width: 1320px;
+    padding-inline: 20px
+}
+
+
+.gridContainer {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: minmax(0, max-content);
+    grid-gap: 20px;
+  }
+  .gridContainer img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .description:first-letter {
+    text-transform:uppercase;
+   }
