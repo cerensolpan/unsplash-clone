@@ -56,6 +56,7 @@ module.exports = {
     extend: {
       colors: {
         'gray': gray,
+        
     },
     fontSize: {
       '2xs': '.65rem',
@@ -72,8 +73,9 @@ module.exports = {
       '7xl': '4rem',
       '8xl': '5rem',
   },
+  typography: ['first-letter'],
     },
   },
-  plugins: [require('tailwindcss'),],
+  plugins: [require('tailwindcss'),require('@tailwindcss/typography')],
 }
 
