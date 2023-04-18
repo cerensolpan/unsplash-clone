@@ -1,15 +1,22 @@
 import Button from "./UI/Button";
 import Search from "./UI/Search";
+import { useNavigate } from "react-router-dom";
 
 export default function NavbarComponent() {
+  const navigateTo = useNavigate();
+  const goHomePage = () => {
+    navigateTo("/");
+  };
   return (
     <nav className="flex items-center gap-2 py-2 px-3">
       <div>
         <img
+          className="cursor-pointer"
           src="/unsplash-logo.svg"
           alt="unsplash-logo"
           width={45}
           height={45}
+          onClick={goHomePage}
         />
       </div>
       <Search />
