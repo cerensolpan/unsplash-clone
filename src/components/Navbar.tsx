@@ -1,12 +1,20 @@
+import { useContext } from "react";
+import { ColorDispatchContext } from "./Provider/ColorProvider";
+import { useNavigate } from "react-router-dom";
+import { Bars3Icon } from "@heroicons/react/24/outline";
 import Button from "./UI/Button";
 import Search from "./UI/Search";
-import { useNavigate } from "react-router-dom";
 
 export default function NavbarComponent() {
   const navigateTo = useNavigate();
+
+  const setSelectedColor = useContext(ColorDispatchContext);
+
   const goHomePage = () => {
     navigateTo("/");
+    setSelectedColor(null);
   };
+
   return (
     <nav className="flex items-center gap-2 py-2 px-3">
       <div>
@@ -34,26 +42,7 @@ export default function NavbarComponent() {
         </div>
         <Button backgroundColor="white">Submit a photo</Button>
       </div>
-      <MenuIcon />
+      <Bars3Icon className="h-8 w-8 baseText" />
     </nav>
   );
 }
-
-const MenuIcon = () => {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      fill="none"
-      viewBox="0 0 24 24"
-      strokeWidth="1.5"
-      stroke="currentColor"
-      className="w-8 h-8 baseText"
-    >
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
-      />
-    </svg>
-  );
-};
