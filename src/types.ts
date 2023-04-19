@@ -1,10 +1,9 @@
 export type ButtonProps = {
   children: React.ReactNode;
   backgroundColor: string;
-  textColor: string;
+  textColor?: string;
   size?: "small" | "medium" | "large";
-  onClick: any;
-  selectedBorder: string;
+  onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
 };
 
 export type Photo = {
@@ -17,17 +16,12 @@ export type Photo = {
   user: {
     name: string;
   };
-  likes: Number;
-  height: Number;
+  likes: number;
+  height: number;
 };
 
 export type ModalProps = {
   handleClose: () => void;
-  open: Boolean;
-  selectedPhoto: Photo;
-};
-
-export type FilterProps = {
-  selectedColor: String;
-  setSelectedColor: any;
+  open: boolean;
+  selectedPhoto?: Photo;
 };
