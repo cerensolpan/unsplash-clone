@@ -46,7 +46,7 @@ const Modal: React.FC<ModalProps> = ({ open, handleClose, selectedPhoto }) => {
                 <div className="relative">
                   <img
                     src={selectedPhoto?.urls?.full}
-                    height={selectedPhoto.height}
+                    height={selectedPhoto?.height}
                     width="100%"
                   />
                   <div className="absolute top-0 left-0 right-0">
