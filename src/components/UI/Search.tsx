@@ -1,16 +1,38 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
+import { ColorDispatchContext } from "../Provider/ColorProvider";
 
 const Search = () => {
   const [style, setStyle] = useState<string>(
     "rounded-full py-2 bg-neutral-100"
   );
   const [focused, setFocused] = useState<boolean>(false);
+  const [searchQuery, setSearchQuery] = useState<string>("");
+
+  const navigateTo = useNavigate();
+  const setSelectedColor = useContext(ColorDispatchContext);
+  const location = useLocation();
 
   useEffect(() => {
     focused
       ? setStyle((value) => `${value} bg-white ring-1 ring-gray-200`)
       : setStyle("rounded-full py-2 bg-neutral-100");
   }, [focused]);
+
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchQuery(event.target.value);
+  };
+
+  const searchPhotos = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === "Enter") {
+      navigateTo(`/s/photos/${searchQuery}`);
+      setSelectedColor(null);
+    }
+  };
+
+  useEffect(() => {
+    if (location.pathname === "/") setSearchQuery("");
+  }, [location]);
 
   return (
     <div
@@ -29,6 +51,9 @@ const Search = () => {
         type="text"
         placeholder="Search free high-resolution images"
         className="w-full text-base bg-transparent focus:outline-none"
+        value={searchQuery}
+        onChange={handleInputChange}
+        onKeyDown={searchPhotos}
       />
       <div className="w-[1px] h-5 bg-neutral-400"></div>
       <VisualIcon />

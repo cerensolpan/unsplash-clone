@@ -1,26 +1,46 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
+import { ColorContext } from "../Provider/ColorProvider";
+import { ButtonProps } from "../../types";
+import { colors } from "../../constants/colorData";
 
-interface IProps {
-  children: React.ReactNode;
-  backgroundColor: string;
-  size?: "small" | "medium" | "large";
-}
+const Button = ({
+  children,
+  backgroundColor,
+  textColor,
+  size = "medium",
+  onClick,
+}: ButtonProps) => {
+  const [sizeValue, setSizeValue] = useState<string>("");
+  const color = React.useContext(ColorContext);
 
-const Button = ({ children, backgroundColor, size = "medium" }: IProps) => {
-    const [sizeValue, setSizeValue] = useState<string>('')
-    useEffect(() => {
-        size==='small' ? setSizeValue('px-1 py-1') :size==='medium' ? setSizeValue('px-2.5 py-1') : setSizeValue('px-3 py-3')
-    }, [])
-    
-   
+  const selectedBorder = colors.find(
+    (item) => item.code === color.selectedColor
+  );
+  useEffect(() => {
+    size === "small"
+      ? setSizeValue("px-1 py-1")
+      : size === "medium"
+      ? setSizeValue("px-2.5 py-1")
+      : setSizeValue("px-8 py-3 shadow-lg");
+  }, []);
+
   return (
     <button
       className={[
-        `bg-${backgroundColor}`,
+        `${backgroundColor}`,
+        `${textColor}`,
         size,
-        "border border-neutral-300 rounded hover:border-neutral-800 text-base text-gray hover:text-black",
-        `${sizeValue}`
+        "border rounded text-base whitespace-nowrap",
+        `${sizeValue}`,
+        `${textColor ? `${textColor}` : "text-gray hover:text-black"}`,
+        `${
+          selectedBorder?.textColor === textColor
+            ? "border-gray"
+            : "border-neutral-300 hover:border-neutral-400"
+        }`,
+        `customClass`,
       ].join(" ")}
+      onClick={onClick}
     >
       {children}
     </button>
