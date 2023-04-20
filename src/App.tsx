@@ -4,14 +4,11 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ColorProvider } from "./components/Provider/ColorProvider";
 import Navbar from "./components/Navbar";
 import Photos from "./components/Photos";
+import Home from "./components/Home";
 
 function App() {
   const [queryClient] = useState(() => new QueryClient());
-  const photosRoutes = [
-    { path: "/", exact: true },
-    { path: "/s/photos/:search" },
-    { path: "/photos/:id" },
-  ];
+  const photosRoutes = [{ path: "/s/photos/:search" }, { path: "/photos/:id" }];
   return (
     <>
       <ColorProvider>
@@ -21,6 +18,7 @@ function App() {
             <div className="bg-neutral-100 h-9 my-4"></div>
             <main>
               <Routes>
+                <Route path="/" element={<Home />} />
                 {photosRoutes.map((route) => (
                   <Route
                     key={route.path}
